@@ -2,57 +2,87 @@ class Aviao {
 
     String modelo;
     String identificador;
-    boolean motor;
     float altura;
     private float velocidade;
     private boolean emVoo;
+    private Motor motorEsquerdo, motorDireito;
 
-    // Etapa 1 - Preparando a base de operações!
     public void imprimaOk() {
         System.out.println("OK!");
     }
 
-    // Etapa 2 - Iniciando um avião básico
     public void imprimaInfos() {
-        System.out.printf("O modelo do avião é %s, com identificador %s e altura de %.2f metros. Motor ligado? %b", getModelo(),getIdentficador(),getAltura(), getMotor());
+        System.out.printf("O modelo do avião é %s, com identificador %s e altura de %.2f metros. Motor ligado? %b", getModelo(),getIdentficador(),getAltura(), getEstadoMotor());
     }
 
-    // Etapa 3 - Ajustando a fábrica de Aviões
-    Aviao(String modelo, String identificador){
+    Aviao(String modelo, String identificador, Motor  motorEsquerdo, Motor motorDireito){
         setAltura(0.0F);
-        setMotor(false);
+        setMotorEsquerdo(motorEsquerdo);
+        setMotorDireito(motorDireito);
         this.modelo = modelo;
         this.identificador = identificador;
     }
 
-    // Etapa 4 - Testando o motor!
     public void ligarMotor(){
-        setMotor(true);
+        motorEsquerdo.ligar();
+        motorDireito.ligar();
         System.out.println("\nVrummmmmmm");
     }
 
     public void desligarMotor(){
-        setMotor(false);
+        motorEsquerdo.desligar();
+        motorDireito.desligar();
         System.out.println("\nDesligando...");
     }
 
+    
+    public void ligarMotorEspecifico(Motor motor){
+        motor.ligar();
+        System.out.println("\nLigando um dos motores...");
+    }
+
+    
+    public void desligarMotorEspecifico(Motor motor){
+        motor.desligar();
+        System.out.println("\nDesligando um dos motores...");
+    }
+
     public void imprimeEstadoMotor(){
-        if(getMotor()){
-            System.out.println("O motor esta ligado!");
+        if(motorDireito.ativo && motorEsquerdo.ativo){
+            System.out.println("Os motores estão ligados!");
         }else{
-            System.out.println("O motor esta desligado...");
+            if(motorDireito.ativo){
+                System.out.println("Somente o motor direito está ligado");
+            }
+            if(motorEsquerdo.ativo){
+                System.out.println("Somente o motor esquerdo está ligado");
+            }
+            else{
+                System.out.println("Os motores estão desligados...");
+            }
         }
     }
 
-    //Etapa 5 - Habilitando pousos e decolagens com velocidade
     public boolean getEstadoMotor(){
-        return getMotor();
+        if (motorDireito.ativo || motorEsquerdo.ativo){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public void acelerar(){
-        float num = 50.0F;
+        float somaPotencia = 0.0F;
+        if(motorEsquerdo.ativo){
+            float potenciaMotorEsquerdo = motorEsquerdo.potencia;
+            somaPotencia =+ potenciaMotorEsquerdo;
+        }
+        if(motorDireito.ativo){
+            float potenciaMotorDireito = motorDireito.potencia;
+            somaPotencia =+ potenciaMotorDireito;
+        }
         if (getEstadoMotor()){
-            float novaVelocidade = getVelocidade() + num;
+            float novaVelocidade = getVelocidade() + somaPotencia;
             setVelocidade(novaVelocidade);
             System.out.printf("\nAviao a %.2f km/h", getVelocidade());
         }else{
@@ -75,7 +105,6 @@ class Aviao {
         atualizarStatusVoo();
     }
 
-    //Etapa 6 - Estou voando ou não?
     public void atualizarStatusVoo(){
         if(getEmVoo()){
             if(getVelocidade() >= 200){
@@ -111,18 +140,6 @@ class Aviao {
         this.identificador = identficador;
     }
 
-    public boolean isMotor() {
-        return this.motor;
-    }
-
-    public boolean getMotor() {
-        return this.motor;
-    }
-
-    public void setMotor(boolean motor) {
-        this.motor = motor;
-    }
-
     public float getAltura() {
         return this.altura;
     }
@@ -145,6 +162,22 @@ class Aviao {
 
     private void setEmVoo(boolean emVoo) {
         this.emVoo = emVoo;
+    }
+
+    public Motor getMotorEsquerdo() {
+        return this.motorEsquerdo;
+    }
+
+    public void setMotorEsquerdo(Motor motorEsquerdo) {
+        this.motorEsquerdo = motorEsquerdo;
+    }
+
+    public Motor getMotorDireito() {
+        return this.motorDireito;
+    }
+
+    public void setMotorDireito(Motor motorDireito) {
+        this.motorDireito = motorDireito;
     }
 
 }
