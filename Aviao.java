@@ -5,7 +5,7 @@ class Aviao {
     String modelo;
     String identificador;
     float altura;
-    ArrayList ListaPassageiros;
+    ArrayList<Passageiro> ListaPassageiros;
     private float velocidade;
     private boolean emVoo;
     private Motor motorEsquerdo, motorDireito;
@@ -24,6 +24,7 @@ class Aviao {
         setMotorDireito(motorDireito);
         this.modelo = modelo;
         this.identificador = identificador;
+        this.ListaPassageiros = new ArrayList<Passageiro>();
     }
 
     public void ligarMotor(){
@@ -126,6 +127,42 @@ class Aviao {
         }
     }
 
+    public boolean adicionarPassageiro(Passageiro passageiro){
+        if (getVelocidade() == 0){
+            ListaPassageiros.add(passageiro);
+            return true;
+        } else{
+            System.out.println("Protocolos de segurança não permitem embarques com a aeronave em movimento");
+            return false;
+        }
+    }
+
+    public Passageiro buscarPassageiroPorCPF(String cpf){
+        for ( int i = 0; i <= ListaPassageiros.size(); i++){
+            if (ListaPassageiros.get(i).getCpf() == cpf){
+                return ListaPassageiros.get(i);
+            }
+        }
+        return null;
+    }
+
+    public void imprimirListaDePassageiros(){
+        System.out.println("**** Lista de Passageiros (as) ****");
+        for ( int i = 0; i < ListaPassageiros.size(); i++){
+            System.out.printf("Nome completo: %s %s, CPF: %s \n", ListaPassageiros.get(i).getPrimeiroNome(), ListaPassageiros.get(i).getUltimoNome(), ListaPassageiros.get(i).getCpf());
+        }
+    }
+
+    public void desembarcarPassageiros(){
+        if (getVelocidade() == 0){
+            for ( int i = 0; i <= ListaPassageiros.size(); i++){
+                ListaPassageiros.remove(ListaPassageiros.get(i));
+                System.out.printf("%s %s desembarcou da aeronave! \n", ListaPassageiros.get(i).getPrimeiroNome(), ListaPassageiros.get(i).getUltimoNome());
+            }
+        } else{
+            System.out.println("Protocolos de segurança não permitem embarques com a aeronave em movimento");
+        }
+    }
 
     public String getModelo() {
         return this.modelo;
