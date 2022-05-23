@@ -1,8 +1,11 @@
+import java.util.ArrayList;
+
 class Aviao { 
 
     String modelo;
     String identificador;
     float altura;
+    ArrayList ListaPassageiros;
     private float velocidade;
     private boolean emVoo;
     private Motor motorEsquerdo, motorDireito;
