@@ -5,10 +5,10 @@ class Main {
         
         //Laboratório 2
         
-        Motor motor1 = new Motor("50XABC", 50.0F);
-        Motor motor2 = new Motor("50XABC", 50.0F);
+        Motor motor1 = new MotorTurbinado("50XABC", 50.0F);
+        Motor motor2 = new MotorTurbinado("50XABC", 50.0F);
         
-        Aviao aviao = new Aviao("Airbus A380", "Airbus A3XX ", motor1, motor2 );
+        Aviao aviao = new Aviao("Airbus A380", "Airbus A3XX ", motor1, motor2);
         
         Passageiro passageiro1 = new Passageiro("Dwight", "Scrhute", "45678913");
         Passageiro passageiro2 = new Passageiro("Michael", "Scott", "45678913");
@@ -25,6 +25,8 @@ class Main {
         aviao.ligarMotor();
         aviao.imprimeEstadoMotor();
 
+        aviao.acelerar();
+        aviao.acelerar();
         aviao.acelerar();
         aviao.adicionarPassageiro(passageiro5);
         aviao.imprimirListaDePassageiros();

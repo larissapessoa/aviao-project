@@ -36,7 +36,7 @@ class Aviao {
     public void desligarMotor(){
         motorEsquerdo.desligar();
         motorDireito.desligar();
-        System.out.println("\nDesligando...");
+        System.out.println("\nDesligando todos os motores...");
     }
 
     
@@ -61,8 +61,8 @@ class Aviao {
             if(motorEsquerdo.ativo){
                 System.out.println("Somente o motor esquerdo está ligado");
             }
-            else{
-                System.out.println("Os motores estão desligados...");
+            if((motorDireito.ativo == false) && (motorEsquerdo.ativo == false)){
+                System.out.println("\n Os motores estão desligados...");
             }
         }
     }
