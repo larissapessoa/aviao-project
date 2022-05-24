@@ -18,7 +18,7 @@ class Aviao {
         System.out.printf("O modelo do avião é %s, com identificador %s e altura de %.2f metros. Motor ligado? %b", getModelo(),getIdentficador(),getAltura(), getEstadoMotor());
     }
 
-    Aviao(String modelo, String identificador, Motor  motorEsquerdo, Motor motorDireito){
+    Aviao(String modelo, String identificador, Motorizavel  motorEsquerdo, Motorizavel motorDireito){
         setAltura(0.0F);
         setMotorEsquerdo(motorEsquerdo);
         setMotorDireito(motorDireito);
@@ -46,20 +46,20 @@ class Aviao {
     }
 
     
-    public void desligarMotorEspecifico(Motor motor){
+    public void desligarMotorEspecifico(Motorizavel motor){
         motor.desligar();
-        System.out.println("\nDesligando um dos motores...");
+        System.out.println("\nDesligando um dos motores");
     }
 
     public void imprimeEstadoMotor(){
-        if(motorDireito.getAtivo() && motorEsquerdo.getAtivo()){
-            System.out.println("Os motores estão ligados!");
+        if((motorDireito.getAtivo() == true) && (motorEsquerdo.getAtivo() == true)){
+            System.out.println("\nOs motores estão ligados!");
         }else{
             if(motorDireito.getAtivo()){
-                System.out.println("Somente o motor direito está ligado");
+                System.out.println("\nSomente o motor direito está ligado");
             }
             if(motorEsquerdo.getAtivo()){
-                System.out.println("Somente o motor esquerdo está ligado");
+                System.out.println("\nSomente o motor esquerdo está ligado");
             }
             if((motorDireito.getAtivo() == false) && (motorEsquerdo.getAtivo() == false)){
                 System.out.println("\n Os motores estão desligados...");
@@ -208,7 +208,7 @@ class Aviao {
         return this.motorEsquerdo;
     }
 
-    public void setMotorEsquerdo(Motor motorEsquerdo) {
+    public void setMotorEsquerdo(Motorizavel motorEsquerdo) {
         this.motorEsquerdo = motorEsquerdo;
     }
 
@@ -216,7 +216,7 @@ class Aviao {
         return this.motorDireito;
     }
 
-    public void setMotorDireito(Motor motorDireito) {
+    public void setMotorDireito(Motorizavel motorDireito) {
         this.motorDireito = motorDireito;
     }
 
