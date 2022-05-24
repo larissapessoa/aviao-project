@@ -10,8 +10,6 @@ public class MotorTurbinado extends Motor {
     }
     
     public Float getPotencia(){
-        Float novaPotencia = getPotencia() * 1.2F;
-        setPotencia(novaPotencia);
-        return getPotencia();
+        return this.potencia * 1.2F;
     }
 }

@@ -1,4 +1,4 @@
-public class Motor {
+public class Motor implements Motorizavel {
     
     String modelo;
     Float potencia;

@@ -8,7 +8,7 @@ class Aviao {
     ArrayList<Passageiro> ListaPassageiros;
     private float velocidade;
     private boolean emVoo;
-    private Motor motorEsquerdo, motorDireito;
+    private Motorizavel motorEsquerdo, motorDireito;
 
     public void imprimaOk() {
         System.out.println("OK!");
@@ -52,23 +52,23 @@ class Aviao {
     }
 
     public void imprimeEstadoMotor(){
-        if(motorDireito.ativo && motorEsquerdo.ativo){
+        if(motorDireito.getAtivo() && motorEsquerdo.getAtivo()){
             System.out.println("Os motores estão ligados!");
         }else{
-            if(motorDireito.ativo){
+            if(motorDireito.getAtivo()){
                 System.out.println("Somente o motor direito está ligado");
             }
-            if(motorEsquerdo.ativo){
+            if(motorEsquerdo.getAtivo()){
                 System.out.println("Somente o motor esquerdo está ligado");
             }
-            if((motorDireito.ativo == false) && (motorEsquerdo.ativo == false)){
+            if((motorDireito.getAtivo() == false) && (motorEsquerdo.getAtivo() == false)){
                 System.out.println("\n Os motores estão desligados...");
             }
         }
     }
 
     public boolean getEstadoMotor(){
-        if (motorDireito.ativo || motorEsquerdo.ativo){
+        if (motorDireito.getAtivo() || motorEsquerdo.getAtivo()){
             return true;
         }else{
             return false;
@@ -77,12 +77,12 @@ class Aviao {
 
     public void acelerar(){
         float somaPotencia = 0.0F;
-        if(motorEsquerdo.ativo){
-            float potenciaMotorEsquerdo = motorEsquerdo.potencia;
+        if(motorEsquerdo.getAtivo()){
+            float potenciaMotorEsquerdo = motorEsquerdo.getPotencia();
             somaPotencia =+ potenciaMotorEsquerdo;
         }
-        if(motorDireito.ativo){
-            float potenciaMotorDireito = motorDireito.potencia;
+        if(motorDireito.getAtivo()){
+            float potenciaMotorDireito = motorDireito.getPotencia();
             somaPotencia =+ potenciaMotorDireito;
         }
         if (getEstadoMotor()){
@@ -204,7 +204,7 @@ class Aviao {
         this.emVoo = emVoo;
     }
 
-    public Motor getMotorEsquerdo() {
+    public Motorizavel getMotorEsquerdo() {
         return this.motorEsquerdo;
     }
 
@@ -212,7 +212,7 @@ class Aviao {
         this.motorEsquerdo = motorEsquerdo;
     }
 
-    public Motor getMotorDireito() {
+    public Motorizavel getMotorDireito() {
         return this.motorDireito;
     }
 
