@@ -8,6 +8,9 @@ class Main {
         
         Aviao aviao = new Aviao("Airbus A380", "Airbus A3XX ", motor1, motor2);
 
+        TorreDeControle torreDeControle1 = new TorreDeControle("Torre ALFA");
+        TorreDeControle torreDeControle2 = new TorreDeControle("Torre ÔMEGA");
+
         AguiaGigante aguiaGigante1 =  new AguiaGigante(1000F, "Gwaihir", 200F, true);
         AguiaGigante aguiaGigante2 =  new AguiaGigante(1000F, "Landroval" , 200F, true);
         
@@ -17,6 +20,9 @@ class Main {
         Passageiro passageiro4 = new Passageiro("Pam", "Beesly", "45678913");
         Passageiro passageiro5 = new Passageiro("Angela", "Martin", "45678913");
         
+        aviao.addObserver(torreDeControle1);
+        aviao.addObserver(torreDeControle2);
+
         aviao.adicionarPassageiro(passageiro1);
         aviao.adicionarPassageiro(passageiro2);
         aviao.adicionarPassageiro(passageiro3);

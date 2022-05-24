@@ -1,6 +1,7 @@
 import java.util.ArrayList;
+import java.util.Observable;
 
-class Aviao { 
+class Aviao extends Observable { 
 
     String modelo;
     String identificador;
@@ -110,21 +111,33 @@ class Aviao {
     }
 
     public void atualizarStatusVoo(){
+        String status = "";
         if(getEmVoo()){
             if(getVelocidade() >= 200){
-                System.out.println("Estou voando...");
+                status = "Estou voando...";
+                System.out.println(status);
             }else{
                 setEmVoo(false);
-                System.out.println("Estou aterrisando..."); 
+                status = "Estou aterrisando...";
+                System.out.println(status); 
             }
         }else{
             if(getVelocidade() < 200){
-                System.out.println("Estou em solo...");
+                status = "Estou em solo...";
+                System.out.println(status);
             }else{
                 setEmVoo(true);
-                System.out.println("Estou decolando...");
+                status = "Estou decolando...";
+                System.out.println(status);
             }
         }
+        String notificação = "*** Notficação de status *** \n Modelo: " + getModelo() + " \n Identificador: " + getIdentficador() +
+            "\n Velocidade: " + getVelocidade() + "\n Status: " + status + "\n";
+        
+        
+        setChanged();
+        notifyObservers(notificação);
+        
     }
 
     public boolean adicionarPassageiro(Passageiro passageiro){
